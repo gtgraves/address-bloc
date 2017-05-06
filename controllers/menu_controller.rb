@@ -13,7 +13,8 @@ class MenuController
     puts "2 - Create an entry"
     puts "3 - Search for an entry"
     puts "4 - Import entries from a CSV"
-    puts "5 - Exit"
+    puts "5 - Delete All Entries"
+    puts "6 - Exit"
     print "Enter your selection: "
 
     selection = gets.to_i
@@ -36,6 +37,10 @@ class MenuController
         read_csv
         main_menu
       when 5
+        system "clear"
+        detonate
+        main_menu
+      when 6
         puts "Good-bye!"
         exit(0)
       else
@@ -73,7 +78,7 @@ class MenuController
   end
 
   def search_entries
-    pint "Search by name: "
+    print "Search by name: "
     name = gets.chomp
     match = address_book.binary_search(name)
     system "clear"
@@ -174,5 +179,10 @@ class MenuController
         puts entry.to_s
         search_submenu(entry)
     end
+  end
+
+  def detonate
+    address_book.entries.clear
+    puts "All entries deleted!"
   end
 end
